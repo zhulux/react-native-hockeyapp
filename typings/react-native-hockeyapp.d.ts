@@ -42,6 +42,27 @@ export class HockeyApp {
     * @memberof HockeyApp
     */
     static feedback(): void;
+
+    /**
+     * Set user for Hockey App
+    * 
+    * @param {string} userId
+    * @param {string} userName
+    * @param {string} userEmail
+    * 
+    * @memberof HockeyApp
+    */
+    static setHockeyUser(userId: string, userName: string, userEmail: string): void;
+
+    /**
+     * Displays the feedback UI with Content predefined.
+    * 
+    * @param {string} content 
+    * 
+    * @memberof HockeyApp
+    */
+    static composeFeedback(content: string): void;
+
     /**
      * Attaches arbitrary metadata to the next crash report in order to provide more context about the user's state.
     * 
