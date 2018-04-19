@@ -115,6 +115,28 @@ RCT_EXPORT_METHOD(feedback)
 }
 #endif
 
+
+RCT_EXPORT_METHOD(setHockeyUser:(NSString *)userID userName:(NSString *)userName userEmail:(NSString *)userEmail)
+{
+    if (initialized == YES) {
+        [BITHockeyManager sharedHockeyManager].userID = userID;
+        [BITHockeyManager sharedHockeyManager].userName = userName;
+        [BITHockeyManager sharedHockeyManager].userEmail = userEmail;        
+    } else {
+        NSLog(@"Not initialized! \n");
+    }
+}
+
+RCT_EXPORT_METHOD(composeFeedback:(NSArray *)contents)
+{
+    if (initialized == YES) {
+        [[BITHockeyManager sharedHockeyManager].feedbackManager showFeedbackComposeViewWithPreparedItems:contents];
+    } else {
+        NSLog(@"Not initialized! \n");
+    }
+}
+
+
 RCT_EXPORT_METHOD(checkForUpdate)
 {
     if (initialized == YES) {

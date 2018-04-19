@@ -158,6 +158,41 @@ public class RNHockeyAppModule extends ReactContextBaseJavaModule {
     }
   }
 
+
+  @ReactMethod
+  public void setHockeyUser(String id, String name, String email) {
+    if (_initialized) {
+      FeedbackManager.setUserId(id);
+      FeedbackManager.setUserEmail(email);
+      FeedbackManager.setUserName(name);
+    }
+  }
+
+  @ReactMethod
+  public void composeFeedback(String content) {
+    Activity currentActivity = getCurrentActivity();
+    if (currentActivity == null) {
+        // The currentActivity can be null if it is backgrounded / destroyed, so we simply
+        // no-op to prevent any null pointer exceptions.
+        return;
+    }
+    if (_initialized) {
+      currentActivity.runOnUiThread(new Runnable() {
+        private Activity currentActivity;
+
+        public Runnable init(Activity activity) {
+          currentActivity = activity;
+          return (this);
+        }
+
+        @Override
+        public void run() {
+          FeedbackManager.showFeedbackActivity(currentActivity);
+        }
+      }.init(currentActivity));
+    }
+  }
+
   @ReactMethod
   public void addMetadata(String metadata) {
     if (_initialized) {
