@@ -42,7 +42,7 @@ export const HockeyApp = {
         RNHockeyApp.feedback();
     },
     composeFeedback(content) {
-        RNHockeyApp.composeFeedback(content[0]);
+        RNHockeyApp.composeFeedback(content);
     },
     setHockeyUser(userId, userName, userEmail) {
         RNHockeyApp.setHockeyUser(userId, userName, userEmail);
